@@ -6,7 +6,7 @@
 int main() {
     srand((unsigned)time(NULL));
 
-    int sizes[] = {10, 1000, 10000, 100000};
+    int sizes[4] =  [10, 1000, 10000, 100000];
     int num_sizes = 4;
 
     for (int i = 0; i < num_sizes; i++) {
