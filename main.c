@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <string.h>
 #include "sort.h"
 
 int main() {
@@ -13,42 +12,39 @@ int main() {
     for (int i = 0; i < num_sizes; i++) {
         int n = sizes[i];
         int *original = malloc(n * sizeof(int));
+        int *arr = malloc(n * sizeof(int));
+
         for (int j = 0; j < n; j++) original[j] = rand();
 
-        int *arr = malloc(n * sizeof(int));
-        long swaps = 0;
-        clock_t start, end;
+        long s1, s2, s3;
         double t1, t2, t3;
+        clock_t start, end;
 
-        memcpy(arr, original, n * sizeof(int));
-        swaps = 0;
+        for (int j = 0; j < n; j++) arr[j] = original[j];
+        s1 = 0;
         start = clock();
-        sort1(arr, n, &swaps);
+        sort1(arr, n, &s1);
         end = clock();
         t1 = (double)(end - start) / CLOCKS_PER_SEC;
-        long s1 = swaps;
 
-        memcpy(arr, original, n * sizeof(int));
-        swaps = 0;
+        for (int j = 0; j < n; j++) arr[j] = original[j];
+        s2 = 0;
         start = clock();
-        sort2(arr, n, &swaps);
+        sort2(arr, n, &s2);
         end = clock();
         t2 = (double)(end - start) / CLOCKS_PER_SEC;
-        long s2 = swaps;
 
-        memcpy(arr, original, n * sizeof(int));
-        swaps = 0;
+        for (int j = 0; j < n; j++) arr[j] = original[j];
+        s3 = 0;
         start = clock();
-        sort3(arr, n, &swaps);
+        sort3(arr, n, &s3);
         end = clock();
         t3 = (double)(end - start) / CLOCKS_PER_SEC;
-        long s3 = swaps;
 
         printf("%d %f %ld %f %ld %f %ld\n", n, t1, s1, t2, s2, t3, s3);
 
         free(original);
         free(arr);
     }
-
     return 0;
 }
